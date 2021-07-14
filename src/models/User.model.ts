@@ -1,4 +1,4 @@
-import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey } from 'sequelize-typescript'
+import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique } from 'sequelize-typescript'
 import Role from './Role.model'
 
 interface UserAttributes {
@@ -6,26 +6,24 @@ interface UserAttributes {
   email: string
   createdAt?: Date
   updatedAt?: Date
-  role?: Role
 }
 
-@Table({
-  timestamps: true
-})
+@Table({ timestamps: true })
 export default class User extends Model<UserAttributes> {
   @Column
-  name: string
+  public name: string
 
   @IsEmail
+  @Unique
   @Column
-  email: string
+  public email: string
 
   @CreatedAt
-  createdAt: Date
+  public createdAt: Date
 
   @UpdatedAt
-  updatedAt: Date
+  public updatedAt: Date
 
   @ForeignKey(() => Role)
-  role: Role
+  public role: Role
 }
