@@ -17,46 +17,60 @@ const sequelize: Sequelize = new Sequelize({
   }
 })
 
-const permissionToCreate = new Permission({ type: OPERATION.CREATE })
-const permissionToRead = new Permission({ type: OPERATION.READ })
-const permissionToUpdate = new Permission({ type: OPERATION.UPDATE })
-const permissionToDelete = new Permission({ type: OPERATION.DELETE })
+const testThisShit = async () => {
 
-const admin: Role = new Role({ name: 'Admin' })
-admin.$add('permissions', permissionToCreate)
-admin.$add('permissions', permissionToRead)
-admin.$add('permissions', permissionToUpdate)
-admin.$add('permissions', permissionToDelete)
+  try {
 
-const user: Role = new Role({ name: 'User' })
-user.$add('permissions', new Permission({ type: OPERATION.READ }))
+    const permissionToCreate = new Permission({ type: OPERATION.CREATE })
+    const permissionToRead = new Permission({ type: OPERATION.READ })
+    const permissionToUpdate = new Permission({ type: OPERATION.UPDATE })
+    const permissionToDelete = new Permission({ type: OPERATION.DELETE })
+    const user: Role = new Role({ name: 'User' })
+    const admin: Role = new Role({ name: 'Admin' })
 
-const person_1: User = new User({
-  name: 'Person_A',
-  email: 'person_a@gmail.com',
+
+    const person_1: User = new User({
+      name: 'Person_A',
+      email: 'person_a@gmail.com',
+    })
+
+    const person_2: User = new User({
+      name: 'Person_B',
+      email: 'person_b@gmail.com'
+    })
+
+    await admin.$add('permissions', permissionToCreate)
+    await admin.$add('permissions', permissionToRead)
+    await admin.$add('permissions', permissionToUpdate)
+    await admin.$add('permissions', permissionToDelete)
+
+    await user.$add('permissions', permissionToRead)
+
+
+    await admin.$add('users', person_1)
+    await user.$add('users', person_2)
+
+    permissionToCreate.save()
+    permissionToDelete.save()
+    permissionToDelete.save()
+    permissionToUpdate.save()
+
+    admin.save()
+    user.save()
+
+    person_1.save()
+    person_2.save()
+  } catch (err) {
+    console.error(chalk.red(err.message))
+  }
+}
+
+
+
+testThisShit().then(() => {
+
+  sequelize.sync()
+    .then(() => console.log(chalk.black.bgGreen('Sync succes!')))
+    .catch((err: Error) => console.log(err.message))
+
 })
-
-const person_2: User = new User({
-  name: 'Person_B',
-  email: 'person_b@gmail.com'
-})
-
-admin.$add('users', person_1)
-user.$add('users', person_2)
-
-
-
-permissionToCreate.save()
-permissionToDelete.save()
-permissionToDelete.save()
-permissionToUpdate.save()
-
-admin.save()
-user.save()
-
-person_1.save()
-person_2.save()
-
-sequelize.sync()
-  .then(() => console.log(chalk.black.bgGreen('Sync succes!')))
-  .catch((err: Error) => console.log(err.message))

@@ -1,4 +1,4 @@
-import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique } from 'sequelize-typescript'
+import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo } from 'sequelize-typescript'
 import Role from './Role.model'
 
 interface UserAttributes {
@@ -25,5 +25,9 @@ export default class User extends Model<UserAttributes> {
   public updatedAt: Date
 
   @ForeignKey(() => Role)
+  @Column
+  public roleId: number
+
+  @BelongsTo(() => Role)
   public role: Role
 }
