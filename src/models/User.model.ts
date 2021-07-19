@@ -19,13 +19,15 @@ export default class User extends Model<UserAttributes> {
   public email: string
 
   @CreatedAt
+  @Column({ field: 'created_at' })
   public createdAt: Date
 
   @UpdatedAt
+  @Column({ field: 'updated_at' })
   public updatedAt: Date
 
   @ForeignKey(() => Role)
-  @Column
+  @Column({ field: 'role_id' })
   public roleId: number
 
   @BelongsTo(() => Role)

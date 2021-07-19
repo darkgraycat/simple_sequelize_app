@@ -10,10 +10,10 @@ import Role from "./Role.model";
 @Table
 export default class RolePermission extends Model<RolePermission> {
   @ForeignKey(() => Role)
-  @Column
+  @Column({ field: 'role_id' })
   public roleId: number
 
   @ForeignKey(() => Permission)
-  @Column
+  @Column({ field: 'permission_id' })
   public permissionId: number
 }
