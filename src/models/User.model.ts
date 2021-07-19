@@ -1,8 +1,9 @@
-import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo, IsUUID, PrimaryKey } from 'sequelize-typescript'
+import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo, IsUUID, PrimaryKey, Default } from 'sequelize-typescript'
+import { UUIDV4 } from 'sequelize'
 import Role from './Role.model'
 
 interface UserAttributes {
-  uuid: string
+  uuid?: string
   name: string
   email: string
   createdAt?: Date
@@ -13,6 +14,7 @@ interface UserAttributes {
 export default class User extends Model<UserAttributes> {
 
   @IsUUID(4)
+  @Default(UUIDV4)
   @PrimaryKey
   @Column
   public uuid: string

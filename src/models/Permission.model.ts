@@ -1,5 +1,6 @@
-import { BelongsToMany, Column, IsUUID, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
-import Role from "./Role.model";
+import { BelongsToMany, Column, Default, IsUUID, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { UUIDV4 } from 'sequelize';
+import Role from './Role.model';
 
 export enum OPERATION {
   CREATE = 'CREATE',
@@ -9,7 +10,7 @@ export enum OPERATION {
 }
 
 interface PermissionAttributes {
-  uuid: string
+  uuid?: string
   type: OPERATION
 }
 
@@ -17,6 +18,7 @@ interface PermissionAttributes {
 export default class Permission extends Model<PermissionAttributes> {
 
   @IsUUID(4)
+  @Default(UUIDV4)
   @PrimaryKey
   @Column
   public uuid: string
