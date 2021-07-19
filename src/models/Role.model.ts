@@ -1,6 +1,5 @@
 import { Table, Model, Column, HasMany, BelongsToMany, Unique, IsUUID, PrimaryKey } from "sequelize-typescript";
 import Permission from "./Permission.model";
-import RolePermission from "./RolePermission.model";
 import User from "./User.model";
 
 interface RoleAttributes {
@@ -24,7 +23,7 @@ export default class Role extends Model<RoleAttributes> {
   @HasMany(() => User)
   public users: User[]
 
-  @BelongsToMany(() => Permission, () => RolePermission)
+  @BelongsToMany(() => Permission, 'role_permission', 'permission_id', 'role_id')
   public permissions: Permission[]
 
 }

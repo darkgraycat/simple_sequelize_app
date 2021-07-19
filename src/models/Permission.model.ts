@@ -1,6 +1,5 @@
 import { BelongsToMany, Column, IsUUID, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
 import Role from "./Role.model";
-import RolePermission from "./RolePermission.model";
 
 export enum OPERATION {
   CREATE = 'CREATE',
@@ -26,6 +25,6 @@ export default class Permission extends Model<PermissionAttributes> {
   @Column
   public type: string
 
-  @BelongsToMany(() => Role, () => RolePermission)
+  @BelongsToMany(() => Role, 'role_permission', 'role_id', 'permission_id')
   public roles: Role[]
 }
