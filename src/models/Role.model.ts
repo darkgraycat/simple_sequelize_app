@@ -18,6 +18,6 @@ export default class Role extends Model<RoleAttributes> {
   public users: User[]
 
   @BelongsToMany(() => Permission, () => RolePermission)
-  public permissions: Array<Permission & { RolePermission: RolePermission }>
+  public permissions: Permission[]
 
 }
