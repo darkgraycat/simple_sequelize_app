@@ -1,4 +1,4 @@
-import { BelongsToMany, Column, Model, Table, Unique } from "sequelize-typescript";
+import { BelongsToMany, Column, IsUUID, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
 import Role from "./Role.model";
 import RolePermission from "./RolePermission.model";
 
@@ -10,15 +10,22 @@ export enum OPERATION {
 }
 
 interface PermissionAttributes {
+  uuid: string
   type: OPERATION
 }
 
 @Table
 export default class Permission extends Model<PermissionAttributes> {
+
+  @IsUUID(4)
+  @PrimaryKey
+  @Column
+  public uuid: string
+
   @Unique
   @Column
   public type: string
 
   @BelongsToMany(() => Role, () => RolePermission)
-  public roles: Array<Role & { RolePermission: RolePermission }>
+  public roles: Role[]
 }

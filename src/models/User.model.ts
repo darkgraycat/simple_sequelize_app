@@ -1,7 +1,8 @@
-import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo } from 'sequelize-typescript'
+import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo, IsUUID, PrimaryKey } from 'sequelize-typescript'
 import Role from './Role.model'
 
 interface UserAttributes {
+  uuid: string
   name: string
   email: string
   createdAt?: Date
@@ -10,6 +11,12 @@ interface UserAttributes {
 
 @Table({ timestamps: true })
 export default class User extends Model<UserAttributes> {
+
+  @IsUUID(4)
+  @PrimaryKey
+  @Column
+  public uuid: string
+
   @Column
   public name: string
 
@@ -27,9 +34,10 @@ export default class User extends Model<UserAttributes> {
   public updatedAt: Date
 
   @ForeignKey(() => Role)
-  @Column({ field: 'role_id' })
-  public roleId: number
+  @Column({ field: 'role_uuid' })
+  public roleUuid: string
 
   @BelongsTo(() => Role)
   public role: Role
+
 }

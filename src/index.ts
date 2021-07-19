@@ -3,23 +3,24 @@ import sequelize from './sequelize'
 import User from './models/User.model'
 import Role from './models/Role.model'
 import Permission, { OPERATION } from './models/Permission.model'
+import { v4 as uuid } from 'uuid'
 
 import chalk from 'chalk'
 
 const testModels = async () => {
   try {
 
-    const user: Role = new Role({ name: 'User' })
-    const admin: Role = new Role({ name: 'Admin' })
+    const user: Role = new Role({ uuid: uuid(), name: 'User' })
+    const admin: Role = new Role({ uuid: uuid(), name: 'Admin' })
 
-    const permissionToCreate: Permission = new Permission({ type: OPERATION.CREATE })
-    const permissionToRead: Permission = new Permission({ type: OPERATION.READ })
-    const permissionToUpdate: Permission = new Permission({ type: OPERATION.UPDATE })
-    const permissionToDelete: Permission = new Permission({ type: OPERATION.DELETE })
+    const permissionToCreate: Permission = new Permission({ uuid: uuid(), type: OPERATION.CREATE })
+    const permissionToRead: Permission = new Permission({ uuid: uuid(), type: OPERATION.READ })
+    const permissionToUpdate: Permission = new Permission({ uuid: uuid(), type: OPERATION.UPDATE })
+    const permissionToDelete: Permission = new Permission({ uuid: uuid(), type: OPERATION.DELETE })
 
-    const person_1: User = new User({ name: 'Person_A', email: 'person_a@gmail.com' })
-    const person_2: User = new User({ name: 'Person_B', email: 'person_b@gmail.com' })
-    const person_3: User = new User({ name: 'Person_C', email: 'person_c@gmail.com' })
+    const person_1: User = new User({ uuid: uuid(), name: 'Person_A', email: 'person_a@gmail.com' })
+    const person_2: User = new User({ uuid: uuid(), name: 'Person_B', email: 'person_b@gmail.com' })
+    const person_3: User = new User({ uuid: uuid(), name: 'Person_C', email: 'person_c@gmail.com' })
 
     await admin.save()
     await user.save()
