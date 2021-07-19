@@ -25,6 +25,6 @@ export default class Permission extends Model<PermissionAttributes> {
   @Column
   public type: string
 
-  @BelongsToMany(() => Role, 'role_permission', 'role_id', 'permission_id')
+  @BelongsToMany(() => Role, 'role_permission', 'permission_id', 'role_id')
   public roles: Role[]
 }

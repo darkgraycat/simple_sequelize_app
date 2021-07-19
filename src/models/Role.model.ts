@@ -23,7 +23,7 @@ export default class Role extends Model<RoleAttributes> {
   @HasMany(() => User)
   public users: User[]
 
-  @BelongsToMany(() => Permission, 'role_permission', 'permission_id', 'role_id')
+  @BelongsToMany(() => Permission, 'role_permission', 'role_id', 'permission_id')
   public permissions: Permission[]
 
 }
