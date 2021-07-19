@@ -7,7 +7,7 @@ import Role from "./Role.model";
   https://github.com/RobinBuschmann/sequelize-typescript-example/blob/master/lib/models/MovieActor.ts
 */
 
-@Table
+@Table({ tableName: 'role_permission' })
 export default class RolePermission extends Model<RolePermission> {
   @ForeignKey(() => Role)
   @Column({ field: 'role_uuid' })
