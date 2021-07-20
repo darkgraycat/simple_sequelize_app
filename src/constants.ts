@@ -1,4 +1,4 @@
-import { Dialect } from 'sequelize'
+import { Dialect } from 'sequelize';
 
 export const DATABASE: string = 'usersdb';
 export const USERNAME: string = 'root';

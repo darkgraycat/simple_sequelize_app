@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { DATABASE, USERNAME, PASSWORD, DIALECT, HOST } from './constants'
+import { DATABASE, USERNAME, PASSWORD, DIALECT, HOST } from './constants';
 
 export default new Sequelize({
   database: DATABASE,
