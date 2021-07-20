@@ -13,7 +13,7 @@ const testModels = async () => {
     const users: User[] = [
       await User.create({ name: 'Person_A1', email: 'person_a@gmail.com' }),
       await User.create({ name: 'Person_B1', email: 'person_b@gmail.com' }),
-      await User.create({ name: 'Person_C1', email: 'person_c@gmail.com' })
+      await User.create({ name: 'Person_C1', email: 'person_c@gmail.com' }),
     ];
 
     interface Permissions {
@@ -27,7 +27,7 @@ const testModels = async () => {
       create: await Permission.create({ type: OPERATION.CREATE }),
       read: await Permission.create({ type: OPERATION.READ }),
       update: await Permission.create({ type: OPERATION.UPDATE }),
-      delete: await Permission.create({ type: OPERATION.DELETE })
+      delete: await Permission.create({ type: OPERATION.DELETE }),
     };
 
     await admin.$set('permissions', [
@@ -38,16 +38,16 @@ const testModels = async () => {
     ]);
 
     await user.$set('permissions', [
-      permissions.read
+      permissions.read,
     ]);
 
     await admin.$set('users', [
-      users[0]
+      users[0],
     ]);
 
     await user.$set('users', [
       users[1],
-      users[2]
+      users[2],
     ]);
 
   } catch (err) {

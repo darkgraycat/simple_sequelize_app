@@ -10,6 +10,6 @@ export default new Sequelize({
   dialect: DIALECT,
   models: [__dirname + '/models'],
   define: {
-    timestamps: false
-  }
+    timestamps: false,
+  },
 });
