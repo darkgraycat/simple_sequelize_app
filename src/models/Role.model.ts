@@ -1,30 +1,29 @@
 import { Table, Model, Column, HasMany, BelongsToMany, Unique, IsUUID, PrimaryKey, Default } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
-import Permission from './Permission.model';
-import User from './User.model';
+
+import Permission from './permission.model';
+import User from './user.model';
 
 interface RoleAttributes {
-  uuid?: string
-  name: string
+  uuid?: string;
+  name: string;
 }
 
 @Table
 export default class Role extends Model<RoleAttributes> {
-
   @IsUUID(4)
   @Default(UUIDV4)
   @PrimaryKey
   @Column
-  public uuid: string
+  public uuid: string;
 
   @Unique
   @Column
-  public name: string
+  public name: string;
 
   @HasMany(() => User)
-  public users: User[]
+  public users: User[];
 
   @BelongsToMany(() => Permission, 'role_permission', 'role_id', 'permission_id')
-  public permissions: Permission[]
-
+  public permissions: Permission[];
 }

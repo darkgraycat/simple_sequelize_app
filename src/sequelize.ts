@@ -1,13 +1,15 @@
-import { Sequelize } from 'sequelize-typescript'
+import { Sequelize } from 'sequelize-typescript';
+
+import { DATABASE, USERNAME, PASSWORD, DIALECT, HOST } from './constants'
 
 export default new Sequelize({
-  database: 'usersdb',
-  username: 'root',
-  password: 'msql1234',
-  host: 'localhost',
-  dialect: 'mysql',
+  database: DATABASE,
+  username: USERNAME,
+  password: PASSWORD,
+  host: HOST,
+  dialect: DIALECT,
   models: [__dirname + '/models'],
   define: {
     timestamps: false
   }
-})
+});
