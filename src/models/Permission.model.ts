@@ -11,8 +11,8 @@ export enum OPERATION {
 }
 
 interface PermissionAttributes {
-  uuid?: string
-  type: OPERATION
+  uuid?: string;
+  type: OPERATION;
 }
 
 @Table

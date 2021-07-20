@@ -17,10 +17,10 @@ const testModels = async () => {
     ];
 
     interface Permissions {
-      create: Permission
-      read: Permission
-      update: Permission
-      delete: Permission
+      create: Permission;
+      read: Permission;
+      update: Permission;
+      delete: Permission;
     }
 
     const permissions: Permissions = {

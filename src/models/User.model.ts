@@ -4,11 +4,11 @@ import { UUIDV4 } from 'sequelize';
 import Role from './role.model';
 
 interface UserAttributes {
-  uuid?: string
-  name: string
-  email: string
-  createdAt?: Date
-  updatedAt?: Date
+  uuid?: string;
+  name: string;
+  email: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 @Table({ timestamps: true })
