@@ -1,10 +1,10 @@
 import { Table, Model, Column, HasMany, BelongsToMany, Unique, IsUUID, PrimaryKey, Default } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 
-import Permission from './permission.model';
-import User from './user.model';
+import Permission from '../permission/permission.model';
+import User from '../user/user.model';
 
-interface RoleAttributes {
+export interface RoleAttributes {
   uuid?: string;
   name: string;
 }

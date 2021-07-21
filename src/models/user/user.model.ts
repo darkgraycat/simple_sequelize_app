@@ -1,9 +1,9 @@
 import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo, IsUUID, PrimaryKey, Default } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 
-import Role from './role.model';
+import Role from '../role/role.model';
 
-interface UserAttributes {
+export interface UserAttributes {
   uuid?: string;
   name: string;
   email: string;

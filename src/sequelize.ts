@@ -1,6 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 
 import { DATABASE, USERNAME, PASSWORD, DIALECT, HOST } from './constants';
+import Permission from './models/permission/permission.model';
+import Role from './models/role/role.model';
+import User from './models/user/user.model';
 
 export default new Sequelize({
   database: DATABASE,
@@ -8,7 +11,7 @@ export default new Sequelize({
   password: PASSWORD,
   host: HOST,
   dialect: DIALECT,
-  models: [__dirname + '/models'],
+  models: [User, Role, Permission],
   define: {
     timestamps: false,
   },

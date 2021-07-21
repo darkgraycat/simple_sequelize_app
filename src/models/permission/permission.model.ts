@@ -1,7 +1,7 @@
 import { BelongsToMany, Column, Default, IsUUID, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 
-import Role from './role.model';
+import Role from '../role/role.model';
 
 export enum OPERATION {
   CREATE = 'CREATE',
@@ -10,7 +10,7 @@ export enum OPERATION {
   DELETE = 'DELETE',
 }
 
-interface PermissionAttributes {
+export interface PermissionAttributes {
   uuid?: string;
   type: OPERATION;
 }
