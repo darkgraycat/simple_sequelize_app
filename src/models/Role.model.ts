@@ -7,7 +7,8 @@ import User from './user.model';
 interface RoleAttributes {
   uuid?: string;
   name: string;
-  fuck?: () => string;
+  users?: User[];
+  permissions?: Permission[];
 }
 
 @Table

@@ -7,6 +7,19 @@ import Permission, { OPERATION } from './models/permission.model';
 
 const testModels = async () => {
   try {
+    interface Permissions {
+      create: Permission;
+      read: Permission;
+      update: Permission;
+      delete: Permission;
+    }
+    const permissions: Permissions = {
+      create: await Permission.create({ type: OPERATION.CREATE }),
+      read: await Permission.create({ type: OPERATION.READ }),
+      update: await Permission.create({ type: OPERATION.UPDATE }),
+      delete: await Permission.create({ type: OPERATION.DELETE }),
+    };
+
     const user: Role = await Role.create({ name: ':User:' });
     const admin: Role = await Role.create({ name: ':Admin:' });
 
@@ -15,20 +28,6 @@ const testModels = async () => {
       await User.create({ name: 'Person_B1', email: 'person_b@gmail.com' }),
       await User.create({ name: 'Person_C1', email: 'person_c@gmail.com' }),
     ];
-
-    interface Permissions {
-      create: Permission;
-      read: Permission;
-      update: Permission;
-      delete: Permission;
-    }
-
-    const permissions: Permissions = {
-      create: await Permission.create({ type: OPERATION.CREATE }),
-      read: await Permission.create({ type: OPERATION.READ }),
-      update: await Permission.create({ type: OPERATION.UPDATE }),
-      delete: await Permission.create({ type: OPERATION.DELETE }),
-    };
 
     //@ts-ignore
     await admin.setPermissions([
@@ -44,11 +43,11 @@ const testModels = async () => {
     ]);
 
     //@ts-ignore
-    await admin.addUser(user[0]);
+    await admin.addUser(users[0]);
     //@ts-ignore
-    await user.addUser(user[1]);
+    await user.addUser(users[1]);
     //@ts-ignore
-    await user.addUser(user[2]);
+    await user.addUser(users[2]);
 
   } catch (err) {
     console.error(chalk.red(err.message));
