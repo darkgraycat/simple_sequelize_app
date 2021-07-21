@@ -30,25 +30,25 @@ const testModels = async () => {
       delete: await Permission.create({ type: OPERATION.DELETE }),
     };
 
-    await admin.$set('permissions', [
+    //@ts-ignore
+    await admin.setPermissions([
       permissions.create,
       permissions.read,
       permissions.update,
       permissions.delete,
     ]);
 
-    await user.$set('permissions', [
+    //@ts-ignore
+    await user.addPermissions([
       permissions.read,
     ]);
 
-    await admin.$set('users', [
-      users[0],
-    ]);
-
-    await user.$set('users', [
-      users[1],
-      users[2],
-    ]);
+    //@ts-ignore
+    await admin.addUser(user[0]);
+    //@ts-ignore
+    await user.addUser(user[1]);
+    //@ts-ignore
+    await user.addUser(user[2]);
 
   } catch (err) {
     console.error(chalk.red(err.message));
