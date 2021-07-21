@@ -7,7 +7,6 @@ interface UserAttributes {
   uuid?: string;
   name: string;
   email: string;
-  role?: Role;
   createdAt?: Date;
   updatedAt?: Date;
 }
