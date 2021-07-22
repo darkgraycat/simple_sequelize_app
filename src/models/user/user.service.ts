@@ -1,24 +1,10 @@
 import User, { UserAttributes } from './user.model';
+import { getRoleById } from '../role/role.service';
 
-export const getUserById = (id: string): Promise<User | null> => {
+export const getUserById = (
+  id: string
+): Promise<User | null> => {
   return User.findByPk(id);
-};
-
-export const getAllUsers = (): Promise<User[]> => {
-  return User.findAll();
-};
-
-export const updateUserById = async (
-  id: string,
-  body: Partial<UserAttributes>
-): Promise<User> => {
-  const user = await getUserById(id);
-  if (!user) {
-    throw new Error('User not found');
-  }
-  Object.assign(user, body);
-  await user.save();
-  return user;
 };
 
 export const createUserWithBody = async (
@@ -28,10 +14,13 @@ export const createUserWithBody = async (
   return user;
 };
 
-export const deleteUserById = async (id: string): Promise<void> => {
+export const addRoleToUser = async (
+  id: string,
+  roleId: string
+): Promise<void> => {
   const user = await getUserById(id);
-  if (!user) {
-    throw new Error('User not found');
-  }
-  user.destroy();
-}
+  const role = await getRoleById(roleId);
+  if (!user || !role) throw new Error('No user or role');
+  // @ts-ignore
+  await role.addUser(user);
+};
