@@ -8,7 +8,6 @@ POST - create user
 http://localhost:3000/users
 ```
 {
-  uuid?: string,
   name: string,
   email: string
 }
