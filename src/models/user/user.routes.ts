@@ -8,4 +8,4 @@ import {
 export const router = Router();
 
 router.post('/', createUser);
-router.patch('/:userId/:roleId', updateUser);
+router.patch('/', updateUser);

@@ -9,5 +9,5 @@ import {
 export const router = Router();
 
 router.get('/', getPermissions);
-router.post('/:operation', createPermission);
+router.post('/', createPermission);
 router.delete('/:permissionId', deletePermission);

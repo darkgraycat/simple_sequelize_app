@@ -3,7 +3,7 @@ import { UUIDV4 } from 'sequelize';
 
 import Role from '../role/role.model';
 
-export enum OPERATION {
+export enum TYPES {
   CREATE = 'CREATE',
   READ = 'READ',
   UPDATE = 'UPDATE',
@@ -12,7 +12,7 @@ export enum OPERATION {
 
 export interface PermissionAttributes {
   uuid?: string;
-  type: OPERATION;
+  type: TYPES;
 }
 
 @Table

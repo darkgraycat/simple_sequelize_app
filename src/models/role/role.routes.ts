@@ -8,4 +8,4 @@ import {
 export const router = Router();
 
 router.get('/', getRoles);
-router.post('/:roleName/:permissionsIds', createRole);
+router.post('/', createRole);

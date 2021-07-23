@@ -1,47 +1,19 @@
+import Permission, { TYPES } from './permission.model';
 
-// export const getRoleById = (id: string): Promise<Role | null> => {
-//   return Role.findByPk(id);
-// };
-
-import Permission, { OPERATION } from './permission.model';
-
-// export const getAllRoles = (): Promise<Role[]> => {
-//   return Role.findAll({ include: [Permission] });
-// }
-
-// export const createRoleWithPermissions = async (
-//   roleName: string,
-//   permissionsIds: string[]
-// ): Promise<void> => {
-//   const role = await Role.create({ name: roleName });
-//   permissionsIds.map((permissionId: string) => {
-//     const permission = Permission.findByPk(permissionId);
-//     if (!permission) throw new Error(`Invalid permission id: ${permissionId}`);
-//     // @ts-ignore
-//     role.addPermission(permission);
-//   });
-// };
-
-export const getPermissionById = (
-  permissionId: string
-): Promise<Permission | null> => {
-  return Permission.findByPk(permissionId);
+export interface IPermissionService {
+  getPermission(id: string): Promise<Permission | null>;
+  getAllPermissions(): Promise<Permission[]>;
+  createPermission(type: TYPES): Promise<Permission>;
+  deletePermission(id: string): Promise<void>;
 }
 
-export const getAllPermissions = (): Promise<Permission[]> => {
-  return Permission.findAll();
-}
-
-export const createPermissionWithOperation = async (
-  operation: OPERATION
-): Promise<void> => {
-  await Permission.create({ type: operation });
-}
-
-export const deletePermissionById = async (
-  permissionId: string
-): Promise<void> => {
-  const permission = await getPermissionById(permissionId);
-  if (!permission) throw new Error(`Permission not found: ${permissionId}`);
-  permission.destroy({ force: true });
-}
+export const PermissionService: IPermissionService = {
+  getPermission: (id) => Permission.findByPk(id),
+  getAllPermissions: () => Permission.findAll(),
+  createPermission: async (type) => await Permission.create({ type }),
+  deletePermission: async (id) => {
+    const permission = await PermissionService.getPermission(id);
+    if (!permission) throw new Error(`Permission not found: ${id}`);
+    permission.destroy({ force: true });
+  },
+};
