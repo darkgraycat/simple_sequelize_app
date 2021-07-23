@@ -11,7 +11,7 @@ export const createRole: RequestHandler = async (req, res) => {
   try {
     await RoleService.createRole(
       req.body.name,
-      req.body.permissions.split(';')
+      req.body.permissionsIds
     );
     res.status(STATUS_CODE.CREATED).end();
   } catch (e) {

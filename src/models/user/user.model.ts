@@ -7,8 +7,6 @@ export interface UserAttributes {
   uuid?: string;
   name: string;
   email: string;
-  createdAt?: Date;
-  updatedAt?: Date;
 }
 
 @Table({ timestamps: true })
