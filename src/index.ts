@@ -21,12 +21,8 @@ app.listen(PORT, () => {
   console.log(`Server started at http://${HOST}:${PORT}`);
 });
 
-// /*
 
 (async () => {
   await sequelize.authenticate();
-  // await sequelize.sync({ force: true });
   await sequelize.sync();
 })();
-
-// */
