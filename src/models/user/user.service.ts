@@ -3,13 +3,13 @@ import { RoleService } from '../role/role.service';
 
 export interface IUserService {
   getUser(id: string): Promise<User | null>;
-  createUser(attr: UserAttributes): Promise<User>;
+  createUser(name: string, email: string): Promise<User>;
   addRoleToUser(roleId: string, userId: string): Promise<void>;
 }
 
 export const UserService: IUserService = {
   getUser: (id) => User.findByPk(id),
-  createUser: async (attr) => await User.create(attr),
+  createUser: async (name, email) => await User.create({ name, email }),
   addRoleToUser: async (roleId, userId) => {
     const role = await RoleService.getRole(roleId);
     const user = await UserService.getUser(userId);

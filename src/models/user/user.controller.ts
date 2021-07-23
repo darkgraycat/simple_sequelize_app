@@ -4,7 +4,8 @@ import { UserService } from './user.service';
 import { STATUS_CODE } from '../../constants';
 
 export const createUser: RequestHandler = async (req, res) => {
-  await UserService.createUser(req.body);
+  console.log('!!!!!!!!!!!!!!!!!!!')
+  await UserService.createUser(req.body.name, req.body.email);
   res.status(STATUS_CODE.CREATED).end();
 };
 
