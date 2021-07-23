@@ -2,18 +2,7 @@ import { BelongsToMany, Column, Default, IsUUID, Model, PrimaryKey, Table, Uniqu
 import { UUIDV4 } from 'sequelize';
 
 import Role from '../role/role.model';
-
-export enum TYPES {
-  CREATE = 'CREATE',
-  READ = 'READ',
-  UPDATE = 'UPDATE',
-  DELETE = 'DELETE',
-}
-
-export interface PermissionAttributes {
-  uuid?: string;
-  type: TYPES;
-}
+import { PermissionAttributes } from './permission.interfaces';
 
 @Table
 export default class Permission extends Model<PermissionAttributes> {

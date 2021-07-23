@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
+
 import { STATUS_CODE } from '../../constants';
-import { TYPES } from './permission.model';
+import { TYPES } from './permission.interfaces';
 import { PermissionService } from './permission.service';
 
 export const getPermissions: RequestHandler = async (req, res) => {

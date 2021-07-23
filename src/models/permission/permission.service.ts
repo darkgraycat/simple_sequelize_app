@@ -1,11 +1,5 @@
-import Permission, { TYPES } from './permission.model';
-
-export interface IPermissionService {
-  getPermission(id: string): Promise<Permission | null>;
-  getAllPermissions(): Promise<Permission[]>;
-  createPermission(type: TYPES): Promise<Permission>;
-  deletePermission(id: string): Promise<void>;
-}
+import { IPermissionService } from './permission.interfaces';
+import Permission from './permission.model';
 
 export const PermissionService: IPermissionService = {
   getPermission: (id) => Permission.findByPk(id),

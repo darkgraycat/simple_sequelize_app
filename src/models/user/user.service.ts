@@ -1,11 +1,6 @@
 import User from './user.model';
 import { RoleService } from '../role/role.service';
-
-export interface IUserService {
-  getUser(id: string): Promise<User | null>;
-  createUser(name: string, email: string): Promise<User>;
-  addRoleToUser(roleId: string, userId: string): Promise<void>;
-}
+import { IUserService } from './user.interfaces';
 
 export const UserService: IUserService = {
   getUser: (id) => User.findByPk(id),

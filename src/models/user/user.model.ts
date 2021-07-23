@@ -2,12 +2,7 @@ import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique
 import { UUIDV4 } from 'sequelize';
 
 import Role from '../role/role.model';
-
-export interface UserAttributes {
-  uuid?: string;
-  name: string;
-  email: string;
-}
+import { UserAttributes } from './user.interfaces';
 
 @Table({ timestamps: true })
 export default class User extends Model<UserAttributes> {
