@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 
 import { UserService } from './user.service';
-import { STATUS_CODE } from '../../constants';
+import { STATUS_CODE } from '../constants';
 
 export const createUser: RequestHandler = async (req, res) => {
   await UserService.createUser(req.body.name, req.body.email);

@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-import { STATUS_CODE } from '../../constants';
+import { STATUS_CODE } from '../constants';
 import { TYPES } from './permission.interfaces';
 import { PermissionService } from './permission.service';
 

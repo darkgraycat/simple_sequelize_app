@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-import { STATUS_CODE } from '../../constants';
+import { STATUS_CODE } from '../constants';
 import { RoleService } from './role.service';
 
 export const getRoles: RequestHandler = async (req, res) => {

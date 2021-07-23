@@ -1,9 +1,9 @@
 import express, { Express, Request, Response } from 'express';
 import sequelize from './sequelize';
 
-import { router as userRouter } from './models/user/user.routes';
-import { router as roleRouter } from './models/role/role.routes';
-import { router as permissionRouter } from './models/permission/permission.routes';
+import { router as userRouter } from './user/user.routes';
+import { router as roleRouter } from './role/role.routes';
+import { router as permissionRouter } from './permission/permission.routes';
 import { PORT, HOST } from './constants';
 import { errorHandler, logErrors } from './error_handlers';
 
