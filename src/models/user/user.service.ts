@@ -1,4 +1,4 @@
-import User, { UserAttributes } from './user.model';
+import User from './user.model';
 import { RoleService } from '../role/role.service';
 
 export interface IUserService {
