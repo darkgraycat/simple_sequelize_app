@@ -11,9 +11,9 @@ export const createUser: RequestHandler = async (req, res) => {
 export const updateUser: RequestHandler = async (req, res) => {
   try {
     await UserService.addRoleToUser(req.body.roleId, req.body.userId);
-    res.status(STATUS_CODE.OK).end();
+    return res.status(STATUS_CODE.OK);
   } catch (e) {
-    res.status(STATUS_CODE.BAD_REQUEST).end(e.message);
     console.error(e.message);
+    return res.status(STATUS_CODE.BAD_REQUEST).send(e.message);
   }
 };

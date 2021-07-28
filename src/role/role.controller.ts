@@ -13,9 +13,9 @@ export const createRole: RequestHandler = async (req, res) => {
       req.body.name,
       req.body.permissionsIds
     );
-    res.status(STATUS_CODE.CREATED).end();
+    return res.status(STATUS_CODE.CREATED);
   } catch (e) {
-    res.status(STATUS_CODE.BAD_REQUEST).end(e.message);
     console.error(e.message);
+    return res.status(STATUS_CODE.BAD_REQUEST).send(e.message);
   }
 };
