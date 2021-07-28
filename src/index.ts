@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from 'express';
-import sequelize from './sequelize';
 
 import { router as userRouter } from './user/user.routes';
 import { router as roleRouter } from './role/role.routes';
 import { router as permissionRouter } from './permission/permission.routes';
-import { PORT, HOST } from './constants';
+import { PORT, HOST } from './db/constants';
 import { errorHandler, logErrors } from './error_handlers';
+import Connection from './db/connection';
 
 const app: Express = express();
 
@@ -26,7 +26,4 @@ app.listen(PORT, () => {
   console.log(`Server started at http://${HOST}:${PORT}`);
 });
 
-(async () => {
-  await sequelize.authenticate();
-  await sequelize.sync();
-})();
+Connection.instance.connect();
