@@ -1,11 +1,8 @@
 import { Router } from 'express';
 
-import {
-  createUser,
-  updateUser,
-} from './user.controller';
+import UserController from './user.controller';
 
 export const router = Router();
 
-router.post('/', createUser);
-router.patch('/', updateUser);
+router.post('/', UserController.createUser);
+router.patch('/', UserController.updateUser);

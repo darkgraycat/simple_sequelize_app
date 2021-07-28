@@ -1,13 +1,20 @@
-import { IPermissionService } from './permission.interfaces';
+import { TYPES } from './permission.interfaces';
 import Permission from './permission.model';
 
-export const PermissionService: IPermissionService = {
-  getPermission: (id) => Permission.findByPk(id),
-  getAllPermissions: () => Permission.findAll(),
-  createPermission: async (type) => await Permission.create({ type }),
-  deletePermission: async (id) => {
+export default class PermissionService {
+  public static getPermission(id: string): Promise<Permission | null> {
+    return Permission.findByPk(id);
+  }
+  public static getAllPermissions(): Promise<Permission[]> {
+    return Permission.findAll();
+  }
+  public static createPermission(type: TYPES): Promise<Permission> {
+    return Permission.create({ type });
+  }
+  public static async deletePermission(id: string): Promise<void> {
     const permission = await PermissionService.getPermission(id);
     if (!permission) throw new Error(`Permission not found: ${id}`);
     permission.destroy({ force: true });
-  },
-};
+  }
+
+}

@@ -1,21 +1,25 @@
-import { RequestHandler } from 'express';
+import { Request, Response } from 'express';
 
 import { STATUS_CODE } from '../constants';
-import { RoleService } from './role.service';
+import RoleService from './role.service';
 
-export const getRoles: RequestHandler = async (req, res) => {
-  return res.status(STATUS_CODE.OK).send(await RoleService.getAllRoles());
-};
+export default class RoleController {
 
-export const createRole: RequestHandler = async (req, res) => {
-  try {
-    await RoleService.createRole(
-      req.body.name,
-      req.body.permissionsIds
-    );
-    return res.sendStatus(STATUS_CODE.CREATED);
-  } catch (e) {
-    console.error(e.message);
-    return res.status(STATUS_CODE.BAD_REQUEST).send(e.message);
+  public static async getRoles(req: Request, res: Response) {
+    return res.status(STATUS_CODE.OK).send(await RoleService.getAllRoles());
   }
-};
+
+  public static async createRole(req: Request, res: Response) {
+    try {
+      await RoleService.createRole(
+        req.body.name,
+        req.body.permissionsIds
+      );
+      return res.sendStatus(STATUS_CODE.CREATED);
+    } catch (e) {
+      console.error(e.message);
+      return res.status(STATUS_CODE.BAD_REQUEST).send(e.message);
+    }
+  }
+
+}

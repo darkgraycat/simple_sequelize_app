@@ -1,13 +1,9 @@
 import { Router } from 'express';
 
-import {
-  getPermissions,
-  createPermission,
-  deletePermission,
-} from './permission.controller';
+import PermissionController from './permission.controller';
 
 export const router = Router();
 
-router.get('/', getPermissions);
-router.post('/', createPermission);
-router.delete('/:permissionId', deletePermission);
+router.get('/', PermissionController.getPermissions);
+router.post('/', PermissionController.createPermission);
+router.delete('/:permissionId', PermissionController.deletePermission);
