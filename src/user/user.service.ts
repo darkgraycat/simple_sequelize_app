@@ -10,6 +10,6 @@ export const UserService: IUserService = {
     const user = await UserService.getUser(userId);
     if (!user || !role) throw new Error('No user or role');
     // @ts-ignore
-    await role.addUser(user);
+    await user.setRole(role);
   },
 };
