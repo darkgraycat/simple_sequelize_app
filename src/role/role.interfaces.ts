@@ -1,6 +1,6 @@
 import Role from './role.model';
 
-export interface RoleAttributes {
+export interface IRoleAttributes {
   uuid?: string;
   name: string;
 }

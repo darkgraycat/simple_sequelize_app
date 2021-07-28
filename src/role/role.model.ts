@@ -3,10 +3,10 @@ import { UUIDV4 } from 'sequelize';
 
 import Permission from '../permission/permission.model';
 import User from '../user/user.model';
-import { RoleAttributes } from './role.interfaces';
+import { IRoleAttributes } from './role.interfaces';
 
 @Table
-export default class Role extends Model<RoleAttributes> {
+export default class Role extends Model<IRoleAttributes> {
   @IsUUID(4)
   @Default(UUIDV4)
   @PrimaryKey

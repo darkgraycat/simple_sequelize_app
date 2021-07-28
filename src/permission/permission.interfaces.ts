@@ -7,7 +7,7 @@ export enum TYPES {
   DELETE = 'DELETE',
 }
 
-export interface PermissionAttributes {
+export interface IPermissionAttributes {
   uuid?: string;
   type: TYPES;
 }

@@ -1,6 +1,6 @@
 import User from './user.model';
 
-export interface UserAttributes {
+export interface IUserAttributes {
   uuid?: string;
   name: string;
   email: string;

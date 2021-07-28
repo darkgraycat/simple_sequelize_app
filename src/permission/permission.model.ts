@@ -2,10 +2,10 @@ import { BelongsToMany, Column, Default, IsUUID, Model, PrimaryKey, Table, Uniqu
 import { UUIDV4 } from 'sequelize';
 
 import Role from '../role/role.model';
-import { PermissionAttributes } from './permission.interfaces';
+import { IPermissionAttributes } from './permission.interfaces';
 
 @Table
-export default class Permission extends Model<PermissionAttributes> {
+export default class Permission extends Model<IPermissionAttributes> {
   @IsUUID(4)
   @Default(UUIDV4)
   @PrimaryKey
