@@ -6,6 +6,7 @@ import { router as permissionRouter } from './permission/permission.routes';
 import { PORT, HOST } from './db/constants';
 import { errorHandler, logErrors } from './error_handlers';
 import Connection from './db/connection';
+import { STATUS_CODE } from './constants';
 
 const app: Express = express();
 
@@ -16,7 +17,7 @@ app.use('/roles', roleRouter);
 app.use('/permissions', permissionRouter);
 
 app.all('*', (req: Request, res: Response) => {
-  res.status(400).send('Error: Bad request (400)');
+  res.status(STATUS_CODE.BAD_REQUEST).send('Error: Bad request (400)');
 });
 
 app.use(logErrors);
