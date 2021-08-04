@@ -7,6 +7,9 @@ User.routes
 GET - get user
 http://localhost:3000/users/userId
 
+GET - isAdmin
+http://localhost:3000/users/isAdmin/userId
+
 POST - create user
 http://localhost:3000/users
 ```

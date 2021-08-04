@@ -8,6 +8,11 @@ export default class UserController {
     return res.status(STATUS_CODE.OK).send(await UserService.getUser(req.params.userId));
   }
 
+  public static async isAdmin(req: Request, res: Response) {
+    const user = await UserService.getUser(req.params.userId);
+    return res.status(STATUS_CODE.OK).send(user?.role.name === 'Admin');
+  }
+
   public static async createUser(req: Request, res: Response) {
     await UserService.createUser(req.body.name, req.body.email);
     return res.sendStatus(STATUS_CODE.CREATED);
