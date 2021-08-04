@@ -4,6 +4,9 @@
 ---
 User.routes
 
+GET - get user
+http://localhost:3000/users/userId
+
 POST - create user
 http://localhost:3000/users
 ```

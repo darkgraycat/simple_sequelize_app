@@ -4,6 +4,9 @@ import UserService from './user.service';
 import { STATUS_CODE } from '../constants';
 
 export default class UserController {
+  public static async getUser(req: Request, res: Response) {
+    return res.status(STATUS_CODE.OK).send(await UserService.getUser(req.params.userId));
+  }
 
   public static async createUser(req: Request, res: Response) {
     await UserService.createUser(req.body.name, req.body.email);
