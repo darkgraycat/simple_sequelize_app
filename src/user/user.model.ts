@@ -1,18 +1,11 @@
 import { Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, ForeignKey, Unique, BelongsTo, IsUUID, PrimaryKey, Default } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 
-import Role from './role.model';
-
-interface UserAttributes {
-  uuid?: string;
-  name: string;
-  email: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+import Role from '../role/role.model';
+import { IUserAttributes } from './user.interfaces';
 
 @Table({ timestamps: true })
-export default class User extends Model<UserAttributes> {
+export default class User extends Model<IUserAttributes> {
   @IsUUID(4)
   @Default(UUIDV4)
   @PrimaryKey

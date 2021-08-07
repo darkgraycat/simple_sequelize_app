@@ -1,64 +1,30 @@
-import sequelize from './sequelize';
-import chalk from 'chalk';
+import express, { Express, Request, Response } from 'express';
 
-import User from './models/user.model';
-import Role from './models/role.model';
-import Permission, { OPERATION } from './models/permission.model';
+import { router as userRouter } from './user/user.routes';
+import { router as roleRouter } from './role/role.routes';
+import { router as permissionRouter } from './permission/permission.routes';
+import { PORT, HOST } from './db/constants';
+import { errorHandler, logErrors } from './error_handlers';
+import Connection from './db/connection';
+import { STATUS_CODE } from './constants';
 
-const testModels = async () => {
-  try {
-    const user: Role = await Role.create({ name: ':User:' });
-    const admin: Role = await Role.create({ name: ':Admin:' });
+const app: Express = express();
 
-    const users: User[] = [
-      await User.create({ name: 'Person_A1', email: 'person_a@gmail.com' }),
-      await User.create({ name: 'Person_B1', email: 'person_b@gmail.com' }),
-      await User.create({ name: 'Person_C1', email: 'person_c@gmail.com' }),
-    ];
+app.use(express.json());
 
-    interface Permissions {
-      create: Permission;
-      read: Permission;
-      update: Permission;
-      delete: Permission;
-    }
+app.use('/users', userRouter);
+app.use('/roles', roleRouter);
+app.use('/permissions', permissionRouter);
 
-    const permissions: Permissions = {
-      create: await Permission.create({ type: OPERATION.CREATE }),
-      read: await Permission.create({ type: OPERATION.READ }),
-      update: await Permission.create({ type: OPERATION.UPDATE }),
-      delete: await Permission.create({ type: OPERATION.DELETE }),
-    };
+app.all('*', (req: Request, res: Response) => {
+  res.status(STATUS_CODE.BAD_REQUEST).send('Error: Bad request (400)');
+});
 
-    await admin.$set('permissions', [
-      permissions.create,
-      permissions.read,
-      permissions.update,
-      permissions.delete,
-    ]);
+app.use(logErrors);
+app.use(errorHandler);
 
-    await user.$set('permissions', [
-      permissions.read,
-    ]);
+app.listen(PORT, () => {
+  console.log(`Server started at http://${HOST}:${PORT}`);
+});
 
-    await admin.$set('users', [
-      users[0],
-    ]);
-
-    await user.$set('users', [
-      users[1],
-      users[2],
-    ]);
-
-  } catch (err) {
-    console.error(chalk.red(err.message));
-  }
-};
-
-(async () => {
-  await sequelize.authenticate();
-  await sequelize.sync({ force: true });
-  console.log(chalk.black.bgGreen('Sync succes!'));
-  await testModels();
-  console.log(chalk.black.bgYellow('Done!'));
-})();
+Connection.instance.connect();
